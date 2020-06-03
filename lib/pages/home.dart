@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttershare/models/user.dart';
+import 'package:fluttershare/pages/timeline.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'create_account.dart';
@@ -69,11 +70,11 @@ class _HomeState extends State<Home> {
       });
       doc = await usersRef.document(user.id).get();
     }
-//    currentUser = User.createUser(doc);
-//    print(currentUser.email);
-//    print(currentUser.displayName);
-//    print(currentUser.username);
-//    print(currentUser.photoUrl);
+    currentUser = User.createUser(doc);
+    print(currentUser.email);
+    print(currentUser.displayName);
+    print(currentUser.username);
+    print(currentUser.photoUrl);
   }
 
   login() {
@@ -84,11 +85,11 @@ class _HomeState extends State<Home> {
     googleSignIn.signOut();
   }
 
-  Text buildAuthScreen() {
-    return Text('text');
-
-    //RaisedButton(child: Text('Logout'), onPressed: logout);
-  }
+//  Text buildAuthScreen() {
+//    return Text('text');
+//
+//    //RaisedButton(child: Text('Logout'), onPressed: logout);
+//  }
 
   Scaffold buildUnAuthScreen() {
     return Scaffold(
@@ -133,6 +134,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return isAuth ? buildAuthScreen() : buildUnAuthScreen();
+    return isAuth ? Timeline() : buildUnAuthScreen();
   }
 }

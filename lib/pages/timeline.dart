@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttershare/widgets/header.dart';
+
+import 'home.dart';
 
 class Timeline extends StatefulWidget {
   @override
@@ -8,6 +11,17 @@ class Timeline extends StatefulWidget {
 class _TimelineState extends State<Timeline> {
   @override
   Widget build(context) {
-    return Text("Timeline");
+    return Scaffold(
+      appBar: header(
+        context,
+        title: 'Timeline',
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: null),
+      body: RaisedButton(
+          child: Text('Logout'),
+          onPressed: () {
+            googleSignIn.signOut();
+          }),
+    );
   }
 }

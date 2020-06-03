@@ -5,12 +5,12 @@ AppBar header(context,
   return AppBar(
     automaticallyImplyLeading: removebackBtn ? false : true,
     backgroundColor: Theme.of(context).primaryColor,
-    centerTitle: true,
+    centerTitle: isApptitle ? true : false,
     title: Text(
       isApptitle ? 'Friendsgram' : title,
       style: TextStyle(
-        fontSize: isApptitle ? 50 : 40,
-        fontFamily: isApptitle ? 'signatra' : 'signatra',
+        fontSize: isApptitle ? 50 : 30,
+        fontFamily: isApptitle ? 'signatra' : '',
       ),
     ),
   );
