@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'PhotoGram',
       theme: ThemeData(
-          primarySwatch: Colors.purple, accentColor: Colors.greenAccent),
+          primarySwatch: Colors.pink, accentColor: Colors.greenAccent),
       debugShowCheckedModeBanner: false,
       home: Home(),
     );
