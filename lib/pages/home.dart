@@ -85,12 +85,6 @@ class _HomeState extends State<Home> {
     googleSignIn.signOut();
   }
 
-//  Text buildAuthScreen() {
-//    return Text('text');
-//
-//    //RaisedButton(child: Text('Logout'), onPressed: logout);
-//  }
-
   Scaffold buildUnAuthScreen() {
     return Scaffold(
       body: Container(

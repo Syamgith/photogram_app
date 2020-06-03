@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttershare/pages/upload.dart';
 import 'package:fluttershare/widgets/header.dart';
 
 import 'home.dart';
@@ -16,7 +17,13 @@ class _TimelineState extends State<Timeline> {
         context,
         title: 'Timeline',
       ),
-      floatingActionButton: FloatingActionButton(onPressed: null),
+      floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.photo_camera),
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return Upload();
+            }));
+          }),
       body: RaisedButton(
           child: Text('Logout'),
           onPressed: () {
