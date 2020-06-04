@@ -111,22 +111,14 @@ class _PostState extends State<Post> {
   handleLikePost() {
     bool _isLiked = likes[currentUserId] == true;
     if (_isLiked) {
-      postsRef
-          .document()
-          .collection('userPosts')
-          .document(postId)
-          .updateData({'likes.$currentUserId': false});
+      postsRef.document(postId).updateData({'likes.$currentUserId': false});
       setState(() {
         likeCount -= 1;
         isLiked = false;
         likes[currentUserId] = false;
       });
     } else if (!_isLiked) {
-      postsRef
-          .document()
-          .collection('userPosts')
-          .document(postId)
-          .updateData({'likes.$currentUserId': true});
+      postsRef.document(postId).updateData({'likes.$currentUserId': true});
       setState(() {
         likeCount += 1;
         isLiked = true;
