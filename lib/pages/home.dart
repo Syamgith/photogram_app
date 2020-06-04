@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttershare/models/user.dart';
 import 'package:fluttershare/pages/timeline.dart';
@@ -8,6 +9,9 @@ import 'create_account.dart';
 
 final GoogleSignIn googleSignIn = GoogleSignIn();
 final usersRef = Firestore.instance.collection('users');
+final postsRef = Firestore.instance.collection('posts');
+final timeLineRef = Firestore.instance.collection('timeline');
+final StorageReference storageRef = FirebaseStorage.instance.ref();
 final DateTime timeStamp = DateTime.now();
 User currentUser;
 

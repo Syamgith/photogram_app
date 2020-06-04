@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttershare/models/user.dart';
 import 'package:fluttershare/pages/upload.dart';
@@ -13,6 +14,21 @@ class Timeline extends StatefulWidget {
 }
 
 class _TimelineState extends State<Timeline> {
+  @override
+  void initState() {
+    super.initState();
+    getTimeLine();
+  }
+
+  getTimeLine() async {
+    QuerySnapshot snapshot = await timeLineRef
+        .document(widget.currentUser.id)
+        .collection('timelinePosts')
+        .orderBy('timeStamp', descending: true)
+        .getDocuments();
+    snapshot.documents.map((doc) => null);
+  }
+
   @override
   Widget build(context) {
     return Scaffold(
