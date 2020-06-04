@@ -78,8 +78,6 @@ class _HomeState extends State<Home> {
     currentUser = User.createUser(doc);
     print(currentUser.email);
     print(currentUser.displayName);
-    print(currentUser.username);
-    print(currentUser.photoUrl);
   }
 
   login() {

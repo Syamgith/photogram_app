@@ -115,8 +115,8 @@ class _UploadState extends State<Upload> {
 
   createPostInFirestore({String mediaUrl, String description}) {
     postsRef
-        .document(widget.currentUser.id)
-        .collection('userPosts')
+        //.document(widget.currentUser.id)
+        //.collection('userPosts')
         .document(postId)
         .setData({
       'postId': postId,

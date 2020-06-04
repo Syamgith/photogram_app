@@ -1,7 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttershare/models/user.dart';
 import 'package:fluttershare/pages/home.dart';
 
 class Post extends StatefulWidget {
@@ -78,31 +77,30 @@ class _PostState extends State<Post> {
   });
 
   buildPostHeader() {
-    return FutureBuilder(
-        future: usersRef.document(ownerId).get(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return CircularProgressIndicator();
-          }
-          User user = User.createUser(snapshot.data);
-          return ListTile(
-            leading: CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(user.photoUrl),
-              backgroundColor: Colors.grey,
+    return Container(
+      padding: EdgeInsets.all(5),
+      height: 35,
+      color: Colors.pink,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(left: 20.0),
+            //padding: EdgeInsets.all(15),
+            child: Text(
+              '$username',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22),
             ),
-            title: GestureDetector(
-              child: Text(
-                user.username,
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-            ),
-            trailing: IconButton(
-              icon: null,
-              onPressed: () => print('delete function'),
-            ),
-          );
-        });
+          ),
+          Expanded(
+            child: Text(description),
+          ),
+        ],
+      ),
+    );
   }
 
   handleLikePost() {
@@ -145,53 +143,40 @@ class _PostState extends State<Post> {
   }
 
   buildPostFooter() {
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(top: 40.0, left: 20.0),
-            ),
-            GestureDetector(
-              onTap: () => handleLikePost,
-              child: Icon(
-                isLiked ? Icons.favorite : Icons.favorite_border,
-                size: 28.0,
-                color: Colors.pink,
+    return Container(
+      margin: EdgeInsets.only(bottom: 20),
+      child: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(top: 40.0, left: 20.0),
               ),
-            )
-          ],
-        ),
-        Row(
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(left: 20.0),
-              child: Text(
-                '$likeCount likes',
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-            )
-          ],
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(left: 20.0),
-              child: Text(
-                '$username',
-                style:
-                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Expanded(
-              child: Text(description),
-            ),
-          ],
-        )
-      ],
+              GestureDetector(
+                onTap: () => handleLikePost(),
+                child: Icon(
+                  isLiked ? Icons.favorite : Icons.favorite_border,
+                  size: 28.0,
+                  color: Colors.pink,
+                ),
+              )
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.only(left: 20.0),
+                child: Text(
+                  '$likeCount likes',
+                  style: TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 
