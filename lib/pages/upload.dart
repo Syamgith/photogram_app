@@ -138,11 +138,13 @@ class _UploadState extends State<Upload> {
     createPostInFirestore(
         mediaUrl: mediaUrl, description: captionController.text);
     captionController.clear();
+
     setState(() {
       file = null;
       isUploading = false;
       postId = Uuid().v4();
     });
+    Navigator.pop(context);
   }
 
   Scaffold buildUploadForm() {

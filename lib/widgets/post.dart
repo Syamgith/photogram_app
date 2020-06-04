@@ -80,23 +80,28 @@ class _PostState extends State<Post> {
     return Container(
       padding: EdgeInsets.all(5),
       height: 35,
-      color: Colors.pink,
+      color: Colors.cyan,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
             margin: EdgeInsets.only(left: 20.0),
             //padding: EdgeInsets.all(15),
-            child: Text(
-              '$username',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 22),
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.account_circle),
+                SizedBox(
+                  width: 10.0,
+                ),
+                Text(
+                  '$username',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22),
+                ),
+              ],
             ),
-          ),
-          Expanded(
-            child: Text(description),
           ),
         ],
       ),
@@ -160,7 +165,16 @@ class _PostState extends State<Post> {
                   size: 28.0,
                   color: Colors.pink,
                 ),
-              )
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Expanded(
+                child: Text(
+                  description,
+                  style: TextStyle(fontSize: 17),
+                ),
+              ),
             ],
           ),
           Row(

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttershare/models/user.dart';
 import 'package:fluttershare/pages/upload.dart';
-import 'package:fluttershare/widgets/header.dart';
 import 'package:fluttershare/widgets/post.dart';
 
 import 'home.dart';
@@ -35,19 +34,6 @@ class _TimelineState extends State<Timeline> {
       return posts;
     }
   }
-//
-//  buildTimeline() {
-//    if (posts == null) {
-//      return Center(
-//          child: Text(
-//        'No Posts!',
-//        style: TextStyle(fontSize: 22),
-//      ));
-//    }
-//    return ListView(
-//      children: posts,
-//    );
-//  }
 
   buildTimeline() {
     return FutureBuilder<List<Post>>(
@@ -61,7 +47,11 @@ class _TimelineState extends State<Timeline> {
                   return posts[index];
                 });
           } else {
-            return Text('No photos');
+            return Center(
+                child: Text(
+              'No photos',
+              style: TextStyle(fontSize: 22),
+            ));
           }
         });
   }
@@ -69,9 +59,20 @@ class _TimelineState extends State<Timeline> {
   @override
   Widget build(context) {
     return Scaffold(
-        appBar: header(
-          context,
-          title: 'Timeline',
+        appBar: AppBar(
+          title: Text(
+            'Feeds',
+            style: TextStyle(fontSize: 30),
+          ),
+          actions: <Widget>[
+            RaisedButton(
+                color: Colors.purple.withOpacity(0.5),
+                child: Text('Log out',
+                    style: TextStyle(fontSize: 17, color: Colors.white)),
+                onPressed: () {
+                  googleSignIn.signOut();
+                })
+          ],
         ),
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.photo_camera),
@@ -86,15 +87,6 @@ class _TimelineState extends State<Timeline> {
             );
           },
         ),
-        body: buildTimeline()
-        //RefreshIndicator(
-        //onRefresh: () => getTimeLine(),
-        //child: buildTimeline(),
-        );
+        body: buildTimeline());
   }
 }
-//RaisedButton(
-//child: Text('Logout'),
-//onPressed: () {
-//googleSignIn.signOut();
-//})
