@@ -25,8 +25,9 @@ dependencies:
   firebase_auth: ^0.8.3
   google_sign_in: ^4.0.1+1
   cupertino_icons: ^0.1.2
-  path_provider: ^0.5.0+1
+  path_provider: ^1.4.0
   flutter_svg: ^0.17.3+1
+  cached_network_image: ^2.2.0+1
 
 dev_dependencies:
   flutter_test:

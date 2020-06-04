@@ -128,6 +128,10 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return isAuth ? Timeline() : buildUnAuthScreen();
+    return isAuth
+        ? Timeline(
+            currentUser: currentUser,
+          )
+        : buildUnAuthScreen();
   }
 }
