@@ -10,7 +10,8 @@ import 'create_account.dart';
 final GoogleSignIn googleSignIn = GoogleSignIn();
 final usersRef = Firestore.instance.collection('users');
 final postsRef = Firestore.instance.collection('posts');
-final timeLineRef = Firestore.instance.collection('timeline');
+final userPostsRef =
+    Firestore.instance.collection('posts').document().collection('userPosts');
 final StorageReference storageRef = FirebaseStorage.instance.ref();
 final DateTime timeStamp = DateTime.now();
 User currentUser;

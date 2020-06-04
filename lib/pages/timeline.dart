@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttershare/models/user.dart';
 import 'package:fluttershare/pages/upload.dart';
 import 'package:fluttershare/widgets/header.dart';
+import 'package:fluttershare/widgets/post.dart';
 
 import 'home.dart';
 
@@ -14,6 +15,7 @@ class Timeline extends StatefulWidget {
 }
 
 class _TimelineState extends State<Timeline> {
+  List<Post> posts;
   @override
   void initState() {
     super.initState();
@@ -21,12 +23,28 @@ class _TimelineState extends State<Timeline> {
   }
 
   getTimeLine() async {
-    QuerySnapshot snapshot = await timeLineRef
-        .document(widget.currentUser.id)
-        .collection('timelinePosts')
+    QuerySnapshot snapshot = await userPostsRef
         .orderBy('timeStamp', descending: true)
         .getDocuments();
-    snapshot.documents.map((doc) => null);
+    List<Post> posts =
+        snapshot.documents.map((doc) => Post.fromDocument(doc)).toList();
+    print(snapshot.documents);
+    setState(() {
+      this.posts = posts;
+    });
+  }
+
+  buildTimeline() {
+    if (posts == null) {
+      return Center(
+          child: Text(
+        'No Posts!',
+        style: TextStyle(fontSize: 22),
+      ));
+    }
+    return ListView(
+      children: posts,
+    );
   }
 
   @override
@@ -43,11 +61,15 @@ class _TimelineState extends State<Timeline> {
               return Upload(widget.currentUser);
             }));
           }),
-      body: RaisedButton(
-          child: Text('Logout'),
-          onPressed: () {
-            googleSignIn.signOut();
-          }),
+      body: RefreshIndicator(
+        onRefresh: () => getTimeLine(),
+        child: buildTimeline(),
+      ),
     );
   }
 }
+//RaisedButton(
+//child: Text('Logout'),
+//onPressed: () {
+//googleSignIn.signOut();
+//})
